@@ -1,13 +1,23 @@
 ---
-const { title = 'Astro Tutorial' } = Astro.props;
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title?: string;
+  enabledViewTransition?: boolean;
+}
+const { title = "Astro Tutorial", enabledViewTransition = false } = Astro.props;
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>{title}</title>
+    <slot name="head" />
+    {enabledViewTransition && <ClientRouter />}
   </head>
   <body>
+    <a href="/">ホーム</a>
     <slot />
   </body>
 </html>

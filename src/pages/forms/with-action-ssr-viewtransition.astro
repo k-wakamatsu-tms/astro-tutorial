@@ -1,0 +1,30 @@
+---
+export const prerender = false;
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { actions, isInputError } from "astro:actions";
+
+const result = Astro.getActionResult(actions.contact);
+const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+---
+
+<BaseLayout title="Astro Actions SSR" enabledViewTransition>
+  <form method="post" action={actions.contact}>
+    <label
+      >名前: <input
+        transition:persist
+        name="name"
+        aria-describedby="error"
+      /></label
+    >
+    {inputErrors.name && <p id="error">{inputErrors.name.join(",")}</p>}
+    <label
+      >メッセージ: <textarea
+        transition:persist
+        name="message"
+        aria-describedby="error"></textarea></label
+    >
+    {inputErrors.message && <p id="error">{inputErrors.message.join(",")}</p>}
+    <button type="submit">送信</button>
+    {result?.error && <p style="color: red;">{result.error}</p>}
+  </form>
+</BaseLayout>
