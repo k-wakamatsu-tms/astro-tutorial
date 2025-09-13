@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = false;
+const now = new Date().toISOString();
+---
+<BaseLayout title="SSR Example">
+  <p>このページはリクエストごとにレンダリングされます。</p>
+  <p>現在時刻: {now}</p>
+</BaseLayout>

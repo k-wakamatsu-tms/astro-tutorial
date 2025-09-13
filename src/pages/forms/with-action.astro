@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { server } from '../../actions';
+export const actions = server;
+---
+<BaseLayout title="Astro Actions">
+  <form method="post" action="?/contact">
+    <label>名前: <input name="name" /></label>
+    <label>メッセージ: <textarea name="message"></textarea></label>
+    <button type="submit">送信</button>
+  </form>
+</BaseLayout>
